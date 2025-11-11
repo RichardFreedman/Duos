@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 900;
+            height: 900;
+            background-color: white;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "black"}, "group": 7, "id": 6212645552, "label": "measure", "level": 7, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 75}, {"font": {"color": "black"}, "group": 8, "id": 6212641088, "label": "staff", "level": 8, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 40}, {"font": {"color": "black"}, "group": 8, "id": 5947896112, "label": "staff", "level": 8, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 28}, {"font": {"color": "black"}, "group": 8, "id": 6213468224, "label": "mordent", "level": 8, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 9, "id": 5947892656, "label": "layer", "level": 9, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 37}, {"font": {"color": "black"}, "group": 10, "id": 5947895776, "label": "rest", "level": 10, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 10, "id": 5947886704, "label": "beam", "level": 10, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 7}, {"font": {"color": "black"}, "group": 10, "id": 5947891648, "label": "beam", "level": 10, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 9}, {"font": {"color": "black"}, "group": 10, "id": 5947895344, "label": "beam", "level": 10, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 5}, {"font": {"color": "black"}, "group": 10, "id": 5947887424, "label": "beam", "level": 10, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 5}, {"font": {"color": "black"}, "group": 11, "id": 5947891600, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947895632, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947887616, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947891456, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947893136, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947892752, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947895008, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947887232, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947886560, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947895968, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947895488, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 9, "id": 5947895440, "label": "layer", "level": 9, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 25}, {"font": {"color": "black"}, "group": 10, "id": 5947892608, "label": "rest", "level": 10, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 10, "id": 5947889056, "label": "rest", "level": 10, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 10, "id": 5947892224, "label": "beam", "level": 10, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 7}, {"font": {"color": "black"}, "group": 10, "id": 5947891744, "label": "beam", "level": 10, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 9}, {"font": {"color": "black"}, "group": 11, "id": 5947891984, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947891792, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947893088, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947887376, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 5947886944, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 6213468320, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}, {"font": {"color": "black"}, "group": 11, "id": 6213468416, "label": "note", "level": 11, "scaling": {"label": {"enabled": true}}, "shape": "dot", "size": 10, "value": 0}]);
+        edges = new vis.DataSet([{"arrows": "to", "from": 6212645552, "id": "6212645552_measure|6212641088_staff", "to": 6212641088, "weight": 1}, {"arrows": "to", "from": 6212645552, "id": "6212645552_measure|5947896112_staff", "to": 5947896112, "weight": 1}, {"arrows": "to", "from": 6212645552, "id": "6212645552_measure|6213468224_mordent", "to": 6213468224, "weight": 1}, {"arrows": "to", "from": 6212641088, "id": "6212641088_staff|5947892656_layer", "to": 5947892656, "weight": 1}, {"arrows": "to", "from": 5947892656, "id": "5947892656_layer|5947895776_rest", "to": 5947895776, "weight": 1}, {"arrows": "to", "from": 5947892656, "id": "5947892656_layer|5947886704_beam", "to": 5947886704, "weight": 1}, {"arrows": "to", "from": 5947892656, "id": "5947892656_layer|5947891648_beam", "to": 5947891648, "weight": 1}, {"arrows": "to", "from": 5947892656, "id": "5947892656_layer|5947895344_beam", "to": 5947895344, "weight": 1}, {"arrows": "to", "from": 5947892656, "id": "5947892656_layer|5947887424_beam", "to": 5947887424, "weight": 1}, {"arrows": "to", "from": 5947886704, "id": "5947886704_beam|5947891600_note", "to": 5947891600, "weight": 1}, {"arrows": "to", "from": 5947886704, "id": "5947886704_beam|5947895632_note", "to": 5947895632, "weight": 1}, {"arrows": "to", "from": 5947886704, "id": "5947886704_beam|5947887616_note", "to": 5947887616, "weight": 1}, {"arrows": "to", "from": 5947891648, "id": "5947891648_beam|5947891456_note", "to": 5947891456, "weight": 1}, {"arrows": "to", "from": 5947891648, "id": "5947891648_beam|5947893136_note", "to": 5947893136, "weight": 1}, {"arrows": "to", "from": 5947891648, "id": "5947891648_beam|5947892752_note", "to": 5947892752, "weight": 1}, {"arrows": "to", "from": 5947891648, "id": "5947891648_beam|5947895008_note", "to": 5947895008, "weight": 1}, {"arrows": "to", "from": 5947895344, "id": "5947895344_beam|5947887232_note", "to": 5947887232, "weight": 1}, {"arrows": "to", "from": 5947895344, "id": "5947895344_beam|5947886560_note", "to": 5947886560, "weight": 1}, {"arrows": "to", "from": 5947887424, "id": "5947887424_beam|5947895968_note", "to": 5947895968, "weight": 1}, {"arrows": "to", "from": 5947887424, "id": "5947887424_beam|5947895488_note", "to": 5947895488, "weight": 1}, {"arrows": "to", "from": 5947896112, "id": "5947896112_staff|5947895440_layer", "to": 5947895440, "weight": 1}, {"arrows": "to", "from": 5947895440, "id": "5947895440_layer|5947892608_rest", "to": 5947892608, "weight": 1}, {"arrows": "to", "from": 5947895440, "id": "5947895440_layer|5947889056_rest", "to": 5947889056, "weight": 1}, {"arrows": "to", "from": 5947895440, "id": "5947895440_layer|5947892224_beam", "to": 5947892224, "weight": 1}, {"arrows": "to", "from": 5947895440, "id": "5947895440_layer|5947891744_beam", "to": 5947891744, "weight": 1}, {"arrows": "to", "from": 5947892224, "id": "5947892224_beam|5947891984_note", "to": 5947891984, "weight": 1}, {"arrows": "to", "from": 5947892224, "id": "5947892224_beam|5947891792_note", "to": 5947891792, "weight": 1}, {"arrows": "to", "from": 5947892224, "id": "5947892224_beam|5947893088_note", "to": 5947893088, "weight": 1}, {"arrows": "to", "from": 5947891744, "id": "5947891744_beam|5947887376_note", "to": 5947887376, "weight": 1}, {"arrows": "to", "from": 5947891744, "id": "5947891744_beam|5947886944_note", "to": 5947886944, "weight": 1}, {"arrows": "to", "from": 5947891744, "id": "5947891744_beam|6213468320_note", "to": 6213468320, "weight": 1}, {"arrows": "to", "from": 5947891744, "id": "5947891744_beam|6213468416_note", "to": 6213468416, "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
